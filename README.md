@@ -6,7 +6,7 @@
 
 Course resources, guided activities, and technical examples for learning relational database design, SQL, data analysis, and introductory data mining.
 
-**[Prepare for SQL labs](SQL-Lab-Readiness-Guide.md)** · **[Start with Module 1](#module-catalog)** · **[Find the current syllabus](https://avijitroy.com/teaching/)** · **[Open Brightspace](https://brightspace.cuny.edu/)**
+**[Prepare for SQL labs](SQL-Lab-Readiness-Guide.md)** · **[Review SQL vocabulary](SQL-Vocabulary-Guide.md)** · **[Start with Module 1](#module-catalog)** · **[Find the current syllabus](https://avijitroy.com/teaching/)** · **[Open Brightspace](https://brightspace.cuny.edu/)**
 
 > Design the data. State the relationships. Test the query or model. Explain what the result means.
 
@@ -36,9 +36,12 @@ This repository connects the two major parts of the course: designing, storing, 
 
 The goal is not only to produce a working database, query, notebook, or model. The goal is to understand the data, justify the method, verify the result, and communicate its limitations.
 
-## SQL Lab Readiness
+## Standalone SQL Guides
 
-Before the first hands-on SQL lab, follow the standalone **[SQL Lab Readiness Guide](SQL-Lab-Readiness-Guide.md)** to create and securely configure your Supabase PostgreSQL project. The guide is separate from the instructional modules because it prepares the technical environment rather than introducing a course topic.
+These guides are separate from the instructional modules so students can use them throughout the course:
+
+- **[SQL Lab Readiness Guide](SQL-Lab-Readiness-Guide.md):** create and securely configure a Supabase PostgreSQL project before the first hands-on SQL lab.
+- **[SQL Vocabulary Guide](SQL-Vocabulary-Guide.md):** review formal relational terminology, PostgreSQL language, common distinctions, and lab communication expectations.
 
 ## Module Catalog
 
@@ -80,6 +83,7 @@ The repository may support practice with:
 .
 ├── README.md
 ├── SQL-Lab-Readiness-Guide.md
+├── SQL-Vocabulary-Guide.md
 ├── assets/
 │   └── images/
 │       └── sql-lab/

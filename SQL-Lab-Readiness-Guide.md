@@ -278,4 +278,6 @@ Never send your database password, API keys, connection string, access token, re
 
 This guide prepares the technical environment only. Brightspace provides the official deadline, announcements, lab instructions, submission requirements, and any course-specific updates.
 
+For definitions used during SQL labs, see the **[CSCI 362 SQL Vocabulary Guide](SQL-Vocabulary-Guide.md)**.
+
 © Avijit Roy
