@@ -6,7 +6,7 @@
 
 Course resources, guided activities, and technical examples for learning relational database design, SQL, data analysis, and introductory data mining.
 
-**[Start with Module 1](#module-catalog)** · **[Find the current syllabus](https://avijitroy.com/teaching/)** · **[Open Brightspace](https://brightspace.cuny.edu/)**
+**[Prepare for SQL labs](SQL-Lab-Readiness-Guide.md)** · **[Start with Module 1](#module-catalog)** · **[Find the current syllabus](https://avijitroy.com/teaching/)** · **[Open Brightspace](https://brightspace.cuny.edu/)**
 
 > Design the data. State the relationships. Test the query or model. Explain what the result means.
 
@@ -35,6 +35,10 @@ This repository connects the two major parts of the course: designing, storing, 
 6. Submit through the method stated on Brightspace; a GitHub link is not a submission unless the assignment explicitly requests one.
 
 The goal is not only to produce a working database, query, notebook, or model. The goal is to understand the data, justify the method, verify the result, and communicate its limitations.
+
+## SQL Lab Readiness
+
+Before the first hands-on SQL lab, follow the standalone **[SQL Lab Readiness Guide](SQL-Lab-Readiness-Guide.md)** to create and securely configure your Supabase PostgreSQL project. The guide is separate from the instructional modules because it prepares the technical environment rather than introducing a course topic.
 
 ## Module Catalog
 
@@ -75,6 +79,11 @@ The repository may support practice with:
 ```text
 .
 ├── README.md
+├── SQL-Lab-Readiness-Guide.md
+├── assets/
+│   └── images/
+│       └── sql-lab/
+│           └── project-setup.png
 └── Module 1/
     └── Lecture 1/
         └── CSCI362_Lecture1A_Club_Spreadsheet_Activity.xlsx
