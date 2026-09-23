@@ -1,6 +1,6 @@
 # CSCI 362 — Module 5 SQL Quick Reference
 
-**PostgreSQL / Supabase SQL Editor** · [Explanations](SQL-Fundamentals-Guide.md) · [Project setup](SQL-Lab-Readiness-Guide.md) · [Vocabulary](SQL-Vocabulary-Guide.md)
+**PostgreSQL / Supabase SQL Editor** · [Vocabulary and explanations](SQL-Vocabulary-Guide.md) · [Project setup](SQL-Lab-Readiness-Guide.md)
 
 Use this beside the SQL Editor after you have read the guide. Replace names and values for your question. Run statements in **your own course project** and keep credentials and real personal data out of scripts.
 

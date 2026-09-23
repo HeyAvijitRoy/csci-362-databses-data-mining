@@ -6,7 +6,7 @@
 
 Course resources, guided activities, and technical examples for learning relational database design, SQL, data analysis, and introductory data mining.
 
-**[Prepare for SQL labs](SQL-Lab-Readiness-Guide.md)** · **[Learn SQL fundamentals](SQL-Fundamentals-Guide.md)** · **[Use the SQL quick reference](SQL-Quick-Reference.md)** · **[Start with Module 1](#module-catalog)** · **[Find the current syllabus](https://avijitroy.com/teaching/)** · **[Open Brightspace](https://brightspace.cuny.edu/)**
+**[Prepare for SQL labs](SQL-Lab-Readiness-Guide.md)** · **[Learn SQL vocabulary and fundamentals](SQL-Vocabulary-Guide.md)** · **[Use the SQL quick reference](SQL-Quick-Reference.md)** · **[Start with Module 1](#module-catalog)** · **[Find the current syllabus](https://avijitroy.com/teaching/)** · **[Open Brightspace](https://brightspace.cuny.edu/)**
 
 > Design the data. State the relationships. Test the query or model. Explain what the result means.
 
@@ -41,8 +41,7 @@ The goal is not only to produce a working database, query, notebook, or model. T
 These guides are separate from the instructional modules so students can use them throughout the course:
 
 - **[SQL Lab Readiness Guide](SQL-Lab-Readiness-Guide.md):** create and securely configure a Supabase PostgreSQL project before the first hands-on SQL lab.
-- **[SQL Vocabulary Guide](SQL-Vocabulary-Guide.md):** review formal relational terminology, PostgreSQL language, common distinctions, and lab communication expectations.
-- **[SQL Fundamentals Guide](SQL-Fundamentals-Guide.md):** learn Module 5 PostgreSQL table definitions, data changes, and one-table queries with explanations.
+- **[SQL Vocabulary and Fundamentals Guide](SQL-Vocabulary-Guide.md):** review relational terminology and common distinctions, then practice Module 5 PostgreSQL table definitions, data changes, and one-table queries.
 - **[SQL Quick Reference](SQL-Quick-Reference.md):** keep concise syntax patterns beside the SQL Editor.
 
 ## Module Catalog
@@ -86,7 +85,6 @@ The repository may support practice with:
 ├── README.md
 ├── SQL-Lab-Readiness-Guide.md
 ├── SQL-Vocabulary-Guide.md
-├── SQL-Fundamentals-Guide.md
 ├── SQL-Quick-Reference.md
 ├── assets/
 │   └── images/

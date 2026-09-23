@@ -1,8 +1,8 @@
-# CSCI 362 — SQL Vocabulary Guide
+# CSCI 362 — SQL Vocabulary and Fundamentals Guide
 
 ## Relational Databases, PostgreSQL, and Supabase
 
-This guide defines the vocabulary used in CSCI 362 database discussions, SQL examples, labs, and project instructions. Use it before class, during practice, and when explaining your work.
+This guide defines the vocabulary used in CSCI 362 database discussions, SQL examples, labs, and project instructions. It also includes a guided Module 5 practice section for creating tables and writing one-table queries. Use it before class, during practice, and when explaining your work.
 
 The goal is not merely to recognize a term. You should be able to:
 
@@ -20,7 +20,7 @@ The goal is not merely to recognize a term. You should be able to:
 - **Common SQL term** identifies language commonly used with database software.
 - **PostgreSQL** identifies behavior or syntax specific to the DBMS used in this course.
 - SQL keywords appear in uppercase, such as `SELECT`, but PostgreSQL accepts them in lowercase as well.
-- Examples use a small fictional bookstore database and are not solutions to course assignments.
+- Vocabulary examples use a fictional bookstore; the Module 5 practice section uses fictional campus clubs. Neither is a solution to a course assignment.
 
 SQL may be pronounced “S-Q-L” or “sequel.” Both pronunciations are common.
 
@@ -38,6 +38,7 @@ SQL may be pronounced “S-Q-L” or “sequel.” Both pronunciations are commo
 10. [Commonly Confused Terms](#x-commonly-confused-terms)
 11. [Reading a Complete Example](#xi-reading-a-complete-example)
 12. [Lab Communication Checklist](#xii-lab-communication-checklist)
+13. [Module 5 SQL Fundamentals Practice](#xiii-module-5-sql-fundamentals-practice)
 
 ## Quick Mental Model
 
@@ -1249,6 +1250,172 @@ When explaining SQL work, be prepared to answer:
 - Could the statement affect more rows than intended?
 - Which constraints protect the data?
 - What assumptions or limitations should be documented?
+
+## XIII. Module 5 SQL Fundamentals Practice
+
+This section puts the terms above to work in PostgreSQL's Supabase SQL Editor. Before class, read through the table definitions and queries, and predict their results. In class, use the **Module 5 SQL Live Lab** supplied with the class materials as the step-by-step setup sequence. These examples illustrate individual ideas; do not run both sets of `CREATE` or `INSERT` statements into the same tables. Use the [SQL Lab Readiness Guide](SQL-Lab-Readiness-Guide.md) to prepare your project and the [SQL Quick Reference](SQL-Quick-Reference.md) for compact syntax patterns.
+
+Practice in this order: **predict → run → inspect → explain → change one thing**. Read an error as evidence about the statement or data. All examples use fictional campus-club data; do not enter real student or personal information.
+
+By the end, you should be able to explain a table's definition versus its current rows, create a small table with suitable types and constraints, add and change rows safely, and explain the result of a one-table query. Joins, grouping, aggregate functions, `HAVING`, and subqueries are Module 6 topics. The glossary introduces their names earlier for reference.
+
+### From a model to tables
+
+A club can have many events. `clubs.club_id` identifies each club; `events.club_id` refers to it. Supabase has already created your PostgreSQL database. Create lab tables inside its `public` schema; do not run `CREATE DATABASE` in the course project.
+
+```text
+clubs                         events
+club_id (primary key)   ←     club_id (foreign key)
+club_name                     event_id (primary key)
+founded_year                  title, category, event_date, capacity, fee, is_open, notes
+```
+
+```sql
+CREATE TABLE public.clubs (
+    club_id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    club_name text NOT NULL UNIQUE,
+    founded_year integer CHECK (founded_year >= 1900)
+);
+
+CREATE TABLE public.events (
+    event_id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    club_id integer NOT NULL REFERENCES public.clubs(club_id),
+    title text NOT NULL,
+    category text NOT NULL,
+    event_date date NOT NULL,
+    capacity integer NOT NULL CHECK (capacity > 0),
+    fee numeric(6, 2) NOT NULL DEFAULT 0 CHECK (fee >= 0),
+    is_open boolean NOT NULL DEFAULT true,
+    notes text
+);
+```
+
+`integer` stores whole numbers, `text` stores variable-length text, `numeric(6, 2)` stores exact decimal amounts, `date` stores calendar days, and `boolean` stores `true` or `false`. Use `timestamp` or `timestamptz` only when you need time of day; `timestamptz` represents a time-aware instant. Use `varchar(n)` when a real rule limits text length. Avoid floating-point types for exact fees.
+
+The `CHECK` on `founded_year` rejects supplied years below 1900 but permits `NULL`; add `NOT NULL` if a value must be present. `REFERENCES` rejects an event whose club does not exist. The default foreign-key behavior also rejects deletion of a club that still has events; this first practice does not use cascading deletes. A data type limits the kind of value; a constraint adds a business rule.
+
+Use lowercase, unquoted names such as `event_date`. Single quotes surround text and date values; double quotes identify case-sensitive SQL names and are unnecessary here. End each statement with `;`. SQL keywords are uppercase here for readability, though PostgreSQL accepts lowercase.
+
+> **Predict:** What would happen if you inserted an event with `capacity = 0`? What about an event with a `club_id` absent from `clubs`? Name the constraint that rejects each one.
+
+The SQL Editor has privileges suitable for creating these objects in your course project. A successful SQL Editor query does not establish that a browser client or Data API can access the rows: API grants and Row Level Security are separate. Keep the configuration from the Readiness Guide. Never put passwords, API keys, connection strings, or real student data in shared scripts or screenshots.
+
+### Add rows and inspect them
+
+Name target columns so values map clearly and omitted defaults can take effect:
+
+```sql
+INSERT INTO public.clubs (club_name, founded_year)
+VALUES ('Data Club', 2020);
+
+INSERT INTO public.events
+    (club_id, title, category, event_date, capacity, fee, notes)
+VALUES
+    (1, 'SQL Starter Lab', 'Workshop', '2026-10-02', 30, 0, NULL),
+    (1, 'Data Poster Night', 'Showcase', '2026-10-09', 60, 5.00,
+     'Bring a draft poster');
+```
+
+These event inserts assume a fresh example in which the club received ID 1. Generated IDs are not guaranteed to start at 1 or have no gaps: inspect `public.clubs` and use the actual ID in your project. `is_open` receives its default `true`. `NULL` is a missing value, distinct from the text `'NULL'` and from `''`.
+
+```sql
+SELECT *
+FROM public.events
+ORDER BY event_id;
+```
+
+`*` is convenient for inspection. Name the columns when sharing or reusing a result so the output is clear and less sensitive to later table changes.
+
+### Ask one-table questions
+
+```sql
+SELECT title, event_date
+FROM public.events
+WHERE category = 'Workshop'
+ORDER BY event_date, title;
+```
+
+`FROM` identifies the table, `WHERE` keeps qualifying rows, `SELECT` chooses output columns, and `ORDER BY` determines display order. Without `ORDER BY`, do not assume insertion or ID order. See [Logical Query Processing Order](#logical-query-processing-order) for the broader conceptual sequence.
+
+```sql
+SELECT title, capacity
+FROM public.events
+WHERE capacity >= 30 AND is_open = true
+ORDER BY capacity DESC, title ASC;
+```
+
+Comparisons include `=`, `<>`, `<`, `<=`, `>`, and `>=`. `AND` requires both conditions; `OR` requires either. Parenthesize mixed conditions, for example `WHERE (category = 'Workshop' OR category = 'Showcase') AND is_open = true`. Other useful filters include `fee BETWEEN 0 AND 5` (both endpoints), `category IN ('Workshop', 'Showcase')`, and `title LIKE 'SQL%'`. In a `LIKE` pattern, `%` matches any number of characters and `_` matches one. PostgreSQL's `ILIKE '%data%'` ignores letter case.
+
+Test missing values with `IS NULL` or `IS NOT NULL`, never `= NULL`:
+
+```sql
+SELECT title, notes
+FROM public.events
+WHERE notes IS NULL
+ORDER BY title;
+```
+
+An unknown value does not compare equal to another value, including another `NULL`. A condition that evaluates to unknown does not keep a row in `WHERE`; `notes <> 'Bring a draft poster'` therefore excludes rows with `NULL` notes too.
+
+Expressions calculate result values without changing stored rows. `AS` names a result column, not a new table column:
+
+```sql
+SELECT title AS event,
+       capacity - 5 AS seats_after_five_signups,
+       fee * 2 AS cost_for_two,
+       upper(category) AS category_label,
+       length(title) AS title_characters,
+       coalesce(notes, 'No note') AS display_note
+FROM public.events
+WHERE is_open = true
+ORDER BY event_date, title;
+```
+
+Arithmetic includes `+`, `-`, `*`, and `/`; use parentheses to show intended order. Integer division can differ from decimal division, so use an explicit decimal when a fractional result matters, such as `capacity / 2.0`. `upper`, `length`, and `coalesce` transform each output row without updating the table. `SELECT DISTINCT category FROM public.events;` removes duplicate values from the result; a `UNIQUE` constraint controls stored data.
+
+### Change rows safely
+
+Before an `UPDATE` or `DELETE`, run a `SELECT` with the same `WHERE` condition and verify the target IDs. The examples below assume the fresh example rows received event IDs 1 and 2; check your actual IDs first.
+
+```sql
+SELECT event_id, title, capacity
+FROM public.events
+WHERE event_id = 2;
+
+UPDATE public.events
+SET capacity = 65
+WHERE event_id = 2
+RETURNING event_id, title, capacity;
+```
+
+`RETURNING` displays affected rows. The primary-key predicate identifies at most one event; an `UPDATE` without `WHERE` changes every row.
+
+```sql
+SELECT event_id, title
+FROM public.events
+WHERE event_id = 2;
+
+DELETE FROM public.events
+WHERE event_id = 2
+RETURNING event_id, title;
+```
+
+Delete only a row you intend to discard. The class lab has a designated practice row for deletion; do not delete a core lab row unless instructed. A completed deletion cannot be assumed reversible from the SQL Editor. Rerunning a setup script can also erase work if it drops tables. Check the exact statement before selecting **Run**.
+
+### Read errors as clues
+
+| Message or result | Likely cause | First check |
+| --- | --- | --- |
+| `relation ... does not exist` | Table is absent or its name is misspelled. | Did setup run in the correct project? Is the name `public.events`? |
+| `duplicate key value violates unique constraint` | A primary key or `UNIQUE` value repeats. | Did you run an `INSERT` twice? Is the club name already present? |
+| `violates foreign key constraint` | The referenced club ID is absent. | Inspect `public.clubs` and use an existing ID. |
+| `violates check constraint` | A value breaks a table rule. | Check capacity, fee, or founding year. |
+| `null value ... violates not-null constraint` | A required value was omitted or set to `NULL`. | Recheck the table definition. |
+| Empty result | The query ran, but no row matched. | Check spelling, case, dates, and `NULL` tests. |
+
+**Self-check:** Why does `WHERE fee = 0` find free events while `WHERE notes = NULL` does not find missing notes? Which clause controls result order? How would you preview exactly which rows an `UPDATE` would affect?
+
+For changing assignment instructions, submission rules, and due dates, follow Brightspace. Use the **Module 5 SQL Live Lab** from the class materials for its full sample dataset and run order.
 
 ## Official References
 
