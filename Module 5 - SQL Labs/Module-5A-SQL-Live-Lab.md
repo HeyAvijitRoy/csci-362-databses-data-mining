@@ -12,13 +12,23 @@ Use fictional data only. Do not paste passwords, API keys, connection strings, o
 
 **Fresh-run rule:** The setup below is for a project that does not already have `public.clubs` or `public.events`. Run the two table definitions and seed inserts **once**, in order. If you see “relation already exists” or duplicate rows, stop and inspect your current tables; do not drop tables or repeatedly run the whole setup. We do not use `DROP TABLE` in this lab.
 
+## Why are SQL keywords capitalized?
+
+PostgreSQL treats SQL keywords such as `CREATE TABLE`, `INSERT INTO`, `SELECT`, and `WHERE` the same whether you type them in uppercase or lowercase. For example, `SELECT title FROM public.events;` and `select title from public.events;` mean the same thing. We capitalize keywords to make the commands easier to see beside lowercase table and column names; it is a style choice, not a requirement. Text inside single quotes is data, though, so keep values such as `'Workshop'` spelled and capitalized as intended.
+
 ## Lesson 5A — Build a small database and read its rows
 
 ### A. Predict the structure
 
 We will model three campus clubs and their events. Each event belongs to one existing club. Before running the statements, identify each table's primary key, the foreign key, two required values, and one default.
 
+A table stores rows of one kind of thing: one row per club in `clubs`, and one row per event in `events`. A **primary key** uniquely identifies a row. A **foreign key** connects an event to a club that already exists. `NOT NULL` requires a value, `DEFAULT` supplies one when omitted, and `CHECK` rejects values outside a rule. Look for these words in the definitions below before running them.
+
 ### B. Create the tables
+
+`CREATE TABLE` defines a table's columns and rules. `public` is the schema containing our practice tables. Inside the parentheses, commas separate column definitions, and the semicolon ends the statement.
+
+In `clubs`, `club_id` is generated automatically and acts as the primary key. `club_name` is required and cannot repeat. `founded_year` may be missing (`NULL`), but a supplied year must be at least 1900.
 
 Run **each statement once**, beginning with `clubs` because `events` refers to it:
 
@@ -29,6 +39,10 @@ CREATE TABLE public.clubs (
     founded_year integer CHECK (founded_year >= 1900)
 );
 ```
+
+In `events`, `event_id` is the generated primary key. `club_id` is required and `REFERENCES public.clubs(club_id)` makes it a foreign key. `title`, `category`, `event_date`, and `capacity` are required; capacity must be positive. `fee` defaults to 0 and cannot be negative. `is_open` is a true/false value that defaults to `true`, while `notes` is optional. Create `clubs` first so the referenced table exists when PostgreSQL creates `events`.
+
+The data types describe allowed values: `integer` for whole numbers, `text` for words, `date` for calendar dates, `numeric(6, 2)` for exact numbers with two decimal places, and `boolean` for `true` or `false`.
 
 ```sql
 CREATE TABLE public.events (
@@ -48,6 +62,8 @@ CREATE TABLE public.events (
 
 ### C. Insert small, known data
 
+`INSERT INTO` adds stored rows. The names after the table identify the columns being filled; each parenthesized group after `VALUES` supplies one row in that same order. We omit `club_id` because `GENERATED ALWAYS AS IDENTITY` supplies it. Text uses single quotes, numbers do not, and unquoted `NULL` means the year is unknown.
+
 Run the club insert once. On a fresh setup, generated IDs will be 1, 2, and 3 in this order:
 
 ```sql
@@ -58,6 +74,8 @@ VALUES
     ('Arts Collective', NULL);
 ```
 
+`SELECT` reads data without changing it. `ORDER BY club_id` displays the clubs by generated ID so you can check which ID belongs to each name before inserting events.
+
 Check before continuing:
 
 ```sql
@@ -66,7 +84,9 @@ FROM public.clubs
 ORDER BY club_id;
 ```
 
-If your IDs are different, use the IDs you **actually see** for the matching clubs in the next insert. The numbers below assume a fresh run. Row 6 is a disposable practice row for later DELETE practice. Lesson 5B starts from a new seed dataset.
+Confirm that you see exactly three clubs with IDs 1, 2, and 3 in the order above. If the count or IDs differ, stop and inspect your project before running the event insert; do not guess which club an ID represents.
+
+The event insert names its target columns in order. Each line after `VALUES` is one event. The first number is a `club_id` from the table you just checked; dates and text are quoted, `true` and `false` are boolean values, and `NULL` means no note was supplied. The sixth row is disposable example data. Lesson 5B will replace this small dataset with a new one.
 
 ```sql
 INSERT INTO public.events
@@ -80,6 +100,8 @@ VALUES
     (3, 'Practice Row to Delete','Practice', '2026-10-20', 10, 0.00, true,  NULL);
 ```
 
+Read the saved rows before querying them. `SELECT` shows the listed columns, and `ORDER BY event_id` puts the six generated event IDs in order. This inspection checks that the foreign key values, fees, open/closed values, and missing notes match what you intended to insert.
+
 Inspect what was stored:
 
 ```sql
@@ -89,9 +111,11 @@ FROM public.events
 ORDER BY event_id;
 ```
 
-**Expected checkpoint on a fresh run:** 3 club rows and 6 event rows. The last event has ID 6. `fee` displays two decimal places, and `notes` can show `NULL`. If your IDs differ because the table already contained data, use the actual IDs throughout this lab.
+**Expected checkpoint on a fresh run:** 3 club rows and 6 event rows. The last event has ID 6. `fee` displays two decimal places, and `notes` can show `NULL`. If the count or IDs differ, stop and investigate before relying on the checkpoints below.
 
 ### D. First questions
+
+The first query uses `WHERE category = 'Workshop'` to keep only workshop rows and `ORDER BY event_date` to show them from earliest to latest. It does **not** check `is_open`, so a closed workshop can still appear. In the second query, `>=` means “at least,” `AND` requires both conditions, and `DESC` sorts capacities from largest to smallest. If capacities tie, `title` sorts those rows alphabetically.
 
 Predict the rows before running each query:
 
@@ -112,6 +136,8 @@ ORDER BY capacity DESC, title;
 **Check your reasoning:** The first query returns three workshops, including one that is closed; it filters by category only. The second returns three open events with at least 30 seats, ordered from the largest capacity downward. Try adding `AND is_open = true` to the first query. What disappears, and why?
 
 ### E. Your turn, without changing data
+
+Each prompt uses a different reading skill: `WHERE fee > 0` finds paid events; `ORDER BY fee` sorts them; `DISTINCT` removes repeated categories from the **result**; PostgreSQL's `ILIKE '%data%'` finds titles containing `data` without requiring the same capitalization; and `IS NULL` finds missing notes. `%` means any number of characters. `NULL` is not a normal text value, so `notes = NULL` will not identify missing notes. These are all `SELECT` tasks and should not change stored rows.
 
 Write a query for each prompt. Say what you expect **before** pressing Run.
 
