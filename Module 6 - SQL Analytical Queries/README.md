@@ -125,3 +125,7 @@ That question prevents many join and grouping mistakes.
 - Do not paste passwords, API keys, connection strings, or real student information into SQL.
 - Run the reset only when instructed; it deletes and recreates `public.events` and `public.clubs`.
 - Save working SQL, not screenshots alone.
+
+## Continue to Module 7
+
+In [Module 7](../Module%207/README.md), consider what happens when valid queries are part of a workflow that fails or overlaps with another user's work. Start with [Lesson 7A — Integrity, Transactions, and Concurrency](../Module%207/7A_Guided_Reading.md), an asynchronous reading with examples to trace. Follow Brightspace for when to begin.

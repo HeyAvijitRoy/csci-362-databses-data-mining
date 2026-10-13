@@ -950,6 +950,8 @@ This model helps explain why a `WHERE` clause cannot normally use an aggregate r
 
 **Focus:** How work is committed, who can access it, and how the database finds results.
 
+For a guided application of integrity constraints, ACID, savepoints, and concurrent updates, read [Module 7A — Integrity, Transactions, and Concurrency](Module%207/7A_Guided_Reading.md).
+
 ### Transaction
 
 A logical unit of work containing one or more database operations. A transaction should either complete successfully as intended or leave the database in an acceptable state.
