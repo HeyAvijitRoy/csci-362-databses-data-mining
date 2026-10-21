@@ -51,7 +51,7 @@ These guides are separate from the instructional modules so students can use the
 | Module 1 | Databases, data, information, and data-modeling fundamentals | [Lecture 1A: Club Spreadsheet Activity](Module%201/Lecture%201/CSCI362_Lecture1A_Club_Spreadsheet_Activity.xlsx) |
 | Module 5 | PostgreSQL and Supabase SQL labs: build, query, and safely change practice data | [Module 5 SQL Labs](Module%205%20-%20SQL%20Labs/README.md) |
 | Module 6 | Joins, grouping, aggregates, HAVING, and subqueries | [Module 6 SQL Analytical Queries](Module%206%20-%20SQL%20Analytical%20Queries/README.md) |
-| Module 7 | Database reliability: integrity, transactions, and concurrency | [Module 7 Guide](Module%207/README.md) · [Lesson 7A Guided Reading](Module%207/7A_Guided_Reading.md) |
+| Module 7 | Integrity, transactions, concurrency, security, and query performance | [Module 7 Guide](Module%207/README.md) · [Lesson 7A Guided Reading](Module%207/7A_Guided_Reading.md) · [Lesson 7B Guided Practice](Module%207/7B_Guided_Practice.md) |
 
 Additional SQL scripts, notebooks, sample datasets, labs, and technical examples may be added as the course progresses. Follow the sequence and release guidance posted on Brightspace.
 
@@ -111,7 +111,8 @@ The repository may support practice with:
 │   └── Module-6-SQL-Quick-Reference.md
 └── Module 7/
     ├── README.md
-    └── 7A_Guided_Reading.md
+    ├── 7A_Guided_Reading.md
+    └── 7B_Guided_Practice.md
 ```
 
 Module folders may contain:

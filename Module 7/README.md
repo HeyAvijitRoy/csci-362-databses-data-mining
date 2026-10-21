@@ -2,15 +2,17 @@
 
 [Course repository](../README.md) · [Review Module 6](../Module%206%20-%20SQL%20Analytical%20Queries/README.md)
 
-Module 7 moves from retrieving and summarizing data to keeping database operations reliable when changes fail or users act at the same time.
+Module 7 moves from retrieving and summarizing data to keeping database operations reliable when changes fail or users act at the same time, protecting access, and evaluating query performance.
 
 ## Learning path
 
 1. Read [Lesson 7A — Integrity, Transactions, and Concurrency](7A_Guided_Reading.md). Trace the examples and write your response to the final application exercise. Allow about 65–75 minutes, including the knowledge check.
 2. Complete the Module 7A knowledge check on [Brightspace](https://brightspace.cuny.edu/), following the posted submission instructions.
-3. Bring your reasoning to the Module 7B workshop on authorization and data minimization. Follow Brightspace for workshop materials and any schedule changes.
+3. Work through [Lesson 7B — Security, Transactions, and Query Performance](7B_Guided_Practice.md). Follow the embedded SQL examples, predict their results, inspect the output, and explain the guarantees. All practice SQL is included in the guide; no separate SQL file is needed.
 
 Lesson 7A is an asynchronous reading activity. No database account is required. Its SQL uses hypothetical tables; it is intended for tracing and discussion rather than execution against the Module 5–6 practice database. No reset or setup script is needed for this reading.
+
+Lesson 7B is guided PostgreSQL practice using a dedicated `m7_lab` schema and synthetic equipment data. Use the Supabase SQL Editor or a PostgreSQL client, and run one complete code block at a time. Its optional two-session exercise requires independent database connections; permission and RLS examples are labeled conceptual and are for reading only.
 
 ## Review resources
 
