@@ -27,12 +27,13 @@ Keep these files together in the Module 9 folder. Start with this README; the se
 | [Hourly dataset](hour.csv) | Supplied UCI bike-sharing records used throughout the notebook; keep the filename unchanged |
 | [Data provenance and dictionary](Data_Provenance.md) | Attribution, source information, field meanings, and limits on interpretation |
 | [Original dataset documentation](Readme.txt) | Unchanged UCI source readme; also describes a daily CSV that is not needed or included here |
+| [VS Code setup guide](VS_Code_Setup.md) | Install Python, add notebook support, and run locally on Windows or macOS |
 | [Local requirements](requirements.txt) | Packages for the optional local Jupyter setup |
 
 ## How to work through the module
 
 1. Read Sections 1–4 of the [short reading](Reading.md) before the first class if possible. Review the dataset's grain and dictionary in [Data_Provenance.md](Data_Provenance.md).
-2. Open [Google Colab](https://colab.research.google.com/), choose **File → Upload notebook**, and select `CSCI362_Module09_Student.ipynb`. Save your own copy in Drive and connect to a Python runtime. A CPU runtime is enough; Colab requires no package installation for this lesson.
+2. Choose your environment: follow the [VS Code setup guide](VS_Code_Setup.md) to work locally, or use Colab as follows. Open [Google Colab](https://colab.research.google.com/), choose **File → Upload notebook**, and select `CSCI362_Module09_Student.ipynb`. Save your own copy in Drive and connect to a Python runtime. A CPU runtime is enough; Colab requires no package installation for this lesson.
 3. Run the notebook from the top with **Shift+Enter**. The loading cell reads `hour.csv` directly from public GitHub when no local copy is present; no CSV upload or Google Drive mount is required. Confirm that the file loads as **17,379 rows and 17 columns** before continuing.
 4. Follow **predict → run → inspect → practice → explain**. Read the concept, predict the example's result, run the code, and inspect its output and units. Try the exercise, then double-click its **My interpretation** text cell to write your explanation. Use the [lab checklist](Student_Lab.md) to check the requirements.
 5. On the first class path, work through selection, calculated columns, summaries, grouping, Exercises 1–4, and the exit ticket. Exercise 4 can continue at the next meeting if needed. Review Sections 5–7 of the short reading before the continuation.
@@ -88,6 +89,8 @@ Download your completed notebook with outputs using **File → Download → Down
 Brightspace provides official submission directions, deadlines, and grading information. The files here do not create a new graded assignment. If AI or external help is permitted and used, disclose it according to the syllabus and be ready to explain every line.
 
 ## Optional local setup
+
+For a complete Windows/macOS walkthrough, including installing Python and choosing the notebook kernel, use [Run Module 9 in VS Code](VS_Code_Setup.md). VS Code users can run the notebook directly in the editor. The commands below are an alternative for students who already have Python and prefer browser-based Jupyter Lab.
 
 If you use Jupyter locally, run these commands from the Module 9 folder:
 

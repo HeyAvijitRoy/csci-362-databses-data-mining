@@ -2,6 +2,8 @@
 CSCI 362 · Module 9 · Monday November 9; continue Wednesday November 11, 2026
 
 ## Prepare
+Choose Colab or local VS Code. For VS Code, follow [the setup guide](VS_Code_Setup.md), including Python installation and kernel selection, then complete the same notebook tasks below. The Colab upload/download directions apply only to Colab; VS Code saves files on your computer.
+
 Open `CSCI362_Module09_Student.ipynb` in Colab, save your own copy, and run the cells from the top. The loading cell reads `hour.csv` from public GitHub when no local copy is present; no CSV upload or Google Drive mount is required. Read sections 1-4 of `Reading.md` before the first class if possible; review sections 5-7 before the continuation. See `README.md` for the file map. Use a CPU runtime. Work through the lecture cells in order. The original UCI `Readme.txt` and `Data_Provenance.md` explain the dataset.
 
 Use the notebook's **My interpretation** text cells for explanations. The notebook numbers the six exercises; this handout is the matching checklist. Check Brightspace for the current meeting schedule.
