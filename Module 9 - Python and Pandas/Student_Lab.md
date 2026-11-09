@@ -2,7 +2,7 @@
 CSCI 362 · Module 9 · Monday November 9; continue Wednesday November 11, 2026
 
 ## Prepare
-Open `CSCI362_Module09_Student.ipynb` in Colab, save your own copy, and upload `hour.csv`. Read sections 1-4 of `Reading.md` before the first class if possible; review sections 5-7 before the continuation. See `README.md` for the file map. Use a CPU runtime. Work through the lecture cells in order. The original UCI `Readme.txt` and `Data_Provenance.md` explain the dataset.
+Open `CSCI362_Module09_Student.ipynb` in Colab, save your own copy, and run the cells from the top. The loading cell reads `hour.csv` from public GitHub when no local copy is present; no CSV upload or Google Drive mount is required. Read sections 1-4 of `Reading.md` before the first class if possible; review sections 5-7 before the continuation. See `README.md` for the file map. Use a CPU runtime. Work through the lecture cells in order. The original UCI `Readme.txt` and `Data_Provenance.md` explain the dataset.
 
 Use the notebook's **My interpretation** text cells for explanations. The notebook numbers the six exercises; this handout is the matching checklist. Check Brightspace for the current meeting schedule.
 

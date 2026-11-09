@@ -33,12 +33,12 @@ Keep these files together in the Module 9 folder. Start with this README; the se
 
 1. Read Sections 1–4 of the [short reading](Reading.md) before the first class if possible. Review the dataset's grain and dictionary in [Data_Provenance.md](Data_Provenance.md).
 2. Open [Google Colab](https://colab.research.google.com/), choose **File → Upload notebook**, and select `CSCI362_Module09_Student.ipynb`. Save your own copy in Drive and connect to a Python runtime. A CPU runtime is enough; Colab requires no package installation for this lesson.
-3. Upload `hour.csv` through Colab's folder sidebar. Run the notebook from the top with **Shift+Enter**. Confirm that the file loads as **17,379 rows and 17 columns** before continuing.
+3. Run the notebook from the top with **Shift+Enter**. The loading cell reads `hour.csv` directly from public GitHub when no local copy is present; no CSV upload or Google Drive mount is required. Confirm that the file loads as **17,379 rows and 17 columns** before continuing.
 4. Follow **predict → run → inspect → practice → explain**. Read the concept, predict the example's result, run the code, and inspect its output and units. Try the exercise, then double-click its **My interpretation** text cell to write your explanation. Use the [lab checklist](Student_Lab.md) to check the requirements.
 5. On the first class path, work through selection, calculated columns, summaries, grouping, Exercises 1–4, and the exit ticket. Exercise 4 can continue at the next meeting if needed. Review Sections 5–7 of the short reading before the continuation.
-6. On the second class path, restart the kernel/session and run from the top, uploading the CSV again if it is missing. Finish earlier practice, then complete two-key grouping and Exercises 5–6. Export the five requested records to `top_deviations.csv` and save your work as described below.
+6. On the second class path, restart the kernel/session and run from the top, letting the loading cell read the CSV from GitHub again if needed. Finish earlier practice, then complete two-key grouping and Exercises 5–6. Export the five requested records to `top_deviations.csv` and save your work as described below.
 
-The notebook contains the lesson and practice; separate slides are unnecessary. Its detailed “What this code does” notes are references to revisit after each example. You do not need to memorize the file-search code. Check Brightspace for the current meeting schedule.
+The notebook contains the lesson and practice; separate slides are unnecessary. Its detailed “What this code does” notes are references to revisit after each example. You do not need to memorize the data-loading setup code. Check Brightspace for the current meeting schedule.
 
 ## Readings and references
 
@@ -81,7 +81,7 @@ After reading, explain:
 
 ## Save your work
 
-Before finishing, restart the kernel/session and run all cells in order. A restart clears variables; disconnecting and deleting the runtime also removes uploaded files. If `hour.csv` is missing, upload it again.
+Before finishing, restart the kernel/session and run all cells in order. A restart clears variables; disconnecting and deleting the runtime also removes uploaded files. If `hour.csv` is missing, the loading cell reads it from GitHub again. If GitHub is unavailable, upload the supplied CSV through the folder sidebar and rerun the loading cell.
 
 Download your completed notebook with outputs using **File → Download → Download .ipynb**. After Exercise 6, download `top_deviations.csv` through the folder sidebar's file menu. Confirm that the notebook contains your code and written interpretations and that the CSV has five rows and the five requested columns, without an extra index column. Colab's temporary files are not saved just because the notebook is in Drive.
 
