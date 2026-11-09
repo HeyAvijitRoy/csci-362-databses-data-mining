@@ -1,0 +1,5 @@
+pandas>=2.2,<4
+nbformat>=5.10,<6
+nbclient>=0.10,<1
+ipykernel>=6,<8
+jupyter>=1,<2
