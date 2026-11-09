@@ -1,0 +1,3 @@
+# Keep instructor folders and instructor-named files private in every module.
+[Ii]nstructor/
+*[Ii]nstructor*
